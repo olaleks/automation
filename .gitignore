@@ -1,0 +1,8 @@
+# IntelliJ project files
+/target
+/build
+/allure-results
+.idea
+*.iml
+out
+gen
