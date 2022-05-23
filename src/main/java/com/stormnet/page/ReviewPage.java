@@ -15,15 +15,14 @@ public class ReviewPage {
     return this;
   }
 
-  public ReviewPage setCommentTitle() {
-    commentTitle.sendKeys("High quality product");
+  public ReviewPage setCommentTitle(String commentText) {
+    commentTitle.sendKeys(commentText);
     return this;
   }
 
-  public ReviewPage setReviewContent() {
+  public ReviewPage setReviewContent(String reviewText) {
     reviewContent.sendKeys(
-        "Faded short sleeve t-shirt with high neckline. Soft and stretchy material for a comfortable fit." +
-                "Accessorize with a straw hat and you're ready for summer!");
+        reviewText);
     return this;
   }
   public NotificationWindow clickSubmitReview(){
