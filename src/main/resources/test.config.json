@@ -1,0 +1,10 @@
+{
+  "baseUrl" : "http://automationpractice.com",
+  "timeout" : 5000,
+  "browser" : "chrome",
+  "seleniumBrowserSize" : "1400x920",
+  "browserPosition" : "200x20",
+  "headless" : false,
+  "savePageSource" : false,
+  "fastSetValue" : true
+}
