@@ -1,35 +1,52 @@
 package com.stormnet.base;
 
 import com.codeborne.selenide.Configuration;
-import com.stormnet.page.HomePage;
+import com.stormnet.ConfigLoader;
+import com.stormnet.ConfigModel;
+import com.stormnet.pages.HomePage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import static com.codeborne.selenide.Browsers.CHROME;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.util.Map;
+
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 public abstract class BaseTest {
 
     protected HomePage homePage = new HomePage();
 
     @BeforeAll
-    public static void setUp() {
-        Configuration.baseUrl = "http://automationpractice.com";
-        Configuration.timeout = 5000;
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1400x920";
-        Configuration.browserPosition = "200x20";
-        Configuration.headless = false;
-        Configuration.savePageSource = false;
+    public static void setUp() throws MalformedURLException {
+        ConfigLoader configLoader =new ConfigLoader();
+        ConfigModel configModel = configLoader.getConfigModel();
+
+        Configuration.baseUrl = configModel.getBaseUrl();
+        Configuration.timeout = configModel.getTimeout();
+        Configuration.browser = configModel.getBrowser();
+        Configuration.browserSize = configModel.getBrowserSize();
+        Configuration.browserPosition = configModel.getBrowserPosition();
+        Configuration.headless = configModel.getHeadless();
+        Configuration.savePageSource = configModel.getSavePageSource();
+        Configuration.fastSetValue = configModel.getFastSetValue();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName(CHROME);
-        final ChromeOptions options = new ChromeOptions();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        capabilities.setCapability("enableVNC", true);
-        Configuration.fastSetValue = true;
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability("browserVersion", "101.0");
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        RemoteWebDriver driver = new RemoteWebDriver(
+                URI.create("http://selenoid:4444/wd/hub").toURL(),
+                capabilities
+        );
+        setWebDriver(driver);
         Configuration.browserCapabilities = capabilities;
     }
     @BeforeEach

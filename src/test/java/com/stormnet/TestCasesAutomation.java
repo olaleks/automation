@@ -1,10 +1,17 @@
 package com.stormnet;
 
 import com.stormnet.base.BaseTest;
-import com.stormnet.page.*;
+import com.stormnet.pages.*;
+import com.stormnet.enums.Feature;
+import com.stormnet.services.ui.ScreenshotService;
 import com.stormnet.utils.Utils;
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class TestCasesAutomation extends BaseTest {
 
@@ -131,13 +138,18 @@ public class TestCasesAutomation extends BaseTest {
     myWishlistsPage.clickWishlistDelete().acceptAlert().clickSighOutButton();
   }
 
+  @Owner("Olga Salachyonok")
+  @DisplayName("Display different colours of Summer Printed Dress")
   @Test
+  @Description(
+      "We choose the colors of the dress in the sequence of 4 different colors of the calorie-box black-orange-blue-yellow")
   public void displayDifferentColoursOfSummerPrintedDress() {
     SummerDressPage summerDressPage =
         homePage
             .clickSignInButton()
             .login("test54321@yopmail.com", "12345")
             .hoverDressingMenu()
+            .clickDressingMenu()
             .clickSummerDressesSubMenu()
             .hoverFirstSummerDress()
             .clickViewButton();
@@ -155,4 +167,10 @@ public class TestCasesAutomation extends BaseTest {
         summerDressPage.clickYellowColor().getMainImageSrc());
     summerDressPage.clickSighOutButton();
   }
+//  @Test
+//  public void checkMainPageViaScreenshot(){
+//    ScreenshotService.uiExecutor($("#header"), Feature.HEADER);
+//    ScreenshotService.uiExecutor($("#slider_row"), Feature.SLIDER_ROW);
+//    ScreenshotService.uiExecutor($("#page > .footer-container"), Feature.FOOTER);
+//  }
 }
