@@ -10,7 +10,6 @@ import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -168,11 +167,10 @@ public class TestCasesAutomation extends BaseTest {
         summerDressPage.clickYellowColor().getMainImageSrc());
     summerDressPage.clickSighOutButton();
   }
-  @Test
-  public void checkMainPageViaScreenshot(){
-    ScreenshotService.uiExecutor($("#header"), Feature.HEADER);
-    ScreenshotService.uiExecutor($("#slider_row"), Feature.SLIDER_ROW);
-    ScreenshotService.uiExecutor($("#htmlcontent_home"), Feature.CONTENT_HOME);
-    ScreenshotService.uiExecutor($("#page > .footer-container"), Feature.FOOTER);
-  }
+//  @Test
+//  public void checkMainPageViaScreenshot(){
+//    ScreenshotService.uiExecutor($("#header"), Feature.HEADER);
+//    ScreenshotService.uiExecutor($("#slider_row"), Feature.SLIDER_ROW);
+//    ScreenshotService.uiExecutor($("#page > .footer-container"), Feature.FOOTER);
+//  }
 }
